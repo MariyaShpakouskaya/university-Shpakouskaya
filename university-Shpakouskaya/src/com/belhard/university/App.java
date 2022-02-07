@@ -12,9 +12,10 @@ public class App {
 		Student st7 = new Student("Ivan", "Solncev", 6.2);
 		Student st8 = new Student("Igor", "Solovey", 8.0);
 		Student st9 = new Student("Sam", "Dermin", 7.9);
+		Student st10 = new Student("Filiph", "Korotkov", 8.5);
 
-		Teacher th1 = new Teacher("Oleg", "Demiday");
-		Teacher th2 = new Teacher("Nikita", "Parfenov");
+		Teacher th1 = new Teacher("Oleg", "Demiday", 3);
+		Teacher th2 = new Teacher("Nikita", "Parfenov", 2);
 
 		Group group = new Group();
 		group.setNumber(36);
@@ -35,14 +36,15 @@ public class App {
 
 		System.out.println("\tREMOVED STUDENT 4 AND 6:\n" + group.getList());
 
-		group.addStudent(new Student("Filiph", "Korotkov", 8.5));
 		group.addStudent(st9);
+		group.addStudent(st10);
 
 		System.out.println("\tADDED NEW STUDENTS:\n" + group.getList());
 
 		group.setTeacher(th2);
 
 		System.out.println("\tAPPOINTED NEW TEACHER:\n" + group.getList());
+
 	}
 
 }
