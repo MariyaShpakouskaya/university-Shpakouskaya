@@ -1,23 +1,21 @@
 package com.belhard.university;
 
-import java.util.Date;
-
-public class Student {
-	private static long counter = 1;
+public class Student extends Person {
+	private static long counter = 0;
 	private long id;
-	private String firstName;
-	private String lastName;
-	private Date dateOfBirth;
 	private int yearOfStudy;
 	private boolean isBudget;
 	private Address address;
-	private double averageGradePoint;
+	private double gradePointAverage;
 
-	public Student(String firstName, String lastName, double averageGradePoint) {
-		id = counter++;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.averageGradePoint = averageGradePoint;
+	public Student(String firstName, String lastName, double gradePointAverage) {
+		super(firstName, lastName);
+		id = ++counter;
+		this.gradePointAverage = gradePointAverage;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 	public Address getAddress() {
@@ -26,34 +24,6 @@ public class Student {
 
 	public void setAddress(Address address) {
 		this.address = address;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
 	}
 
 	public int getYearOfStudy() {
@@ -72,11 +42,11 @@ public class Student {
 		this.isBudget = isBudget;
 	}
 
-	public double getAverageGradePoint() {
-		return averageGradePoint;
+	public double getGradePointAverage() {
+		return gradePointAverage;
 	}
 
-	public void setAverageGradePoint(double averageGradePoint) {
-		this.averageGradePoint = averageGradePoint;
+	public void setGradePointAverage(double gradePointAverage) {
+		this.gradePointAverage = gradePointAverage;
 	}
 }

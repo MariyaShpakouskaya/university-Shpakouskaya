@@ -5,31 +5,6 @@ public class Group {
 	private Teacher teacher;
 	private final Student[] students = new Student[8];
 	private int numberOfStudents;
-	private double averageGradePointOfStudents;
-
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
-	}
-
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
-
-	public double getAverageGradePointOfStudents() {
-		return averageGradePointOfStudents;
-	}
-
-	public void setAverageGradePointOfStudents(double averageGradePointOfStudents) {
-		this.averageGradePointOfStudents = averageGradePointOfStudents;
-	}
 
 	public boolean addStudent(Student student) {
 		if (numberOfStudents < students.length) {
@@ -76,8 +51,50 @@ public class Group {
 				break;
 			}
 			list += (i + 1) + ". [id:" + student.getId() + "] " + student.getFirstName() + " " + student.getLastName()
-					+ " /average grade point: " + student.getAverageGradePoint() + "/ \n";
+					+ " /average grade point: " + student.getGradePointAverage() + "/ \n";
 		}
+		list += "\n\tGrade Point Average of group is " + gradePointAverageOfStudents(students) + "\n";
 		return list;
 	}
+
+	public double gradePointAverageOfStudents(Student[] students) {
+		double totalGradePoint = 0;
+		for (int i = 0; i < students.length; i++) {
+			Student student = students[i];
+			if (student == null) {
+				break;
+			}
+			totalGradePoint += student.getGradePointAverage();
+		}
+		double gradePointAverage = totalGradePoint / numberOfStudents;
+		return gradePointAverage;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+
+	public int getNumberOfStudents() {
+		return numberOfStudents;
+	}
+
+	@Override
+	public String toString() {
+		int numberOfFreePlaces = students.length - numberOfStudents;
+		return getList() + "\tNumber of Students: " + numberOfStudents + "\n" + "\tFree places in the group: "
+				+ numberOfFreePlaces + "\n";
+	}
+
 }

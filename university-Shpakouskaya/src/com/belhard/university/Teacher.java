@@ -1,75 +1,20 @@
 package com.belhard.university;
 
-import java.util.Date;
-
-public class Teacher {
-	private static long counter = 1;
-	private long id;
-	private String firstName;
-	private String lastName;
-	private Date dateOfBirth;
-	private String address;
-	private double salary;
-	private int yearsOfExperience;
+public class Teacher extends Employee {
+	private String position;
 	private String subject;
+	private String academicDegree;
 
-	public Teacher(String firstName, String lastName) {
-		id = counter++;
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public Teacher(String firstName, String lastName, int yearOfExperience) {
+		super(firstName, lastName, yearOfExperience);
 	}
 
-	public long getId() {
-		return id;
+	public String getPosition() {
+		return position;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public double getSalary() {
-		return salary;
-	}
-
-	public void setSalary(int salary) {
-		this.salary = salary;
-	}
-
-	public int getYearsOfExperience() {
-		return yearsOfExperience;
-	}
-
-	public void setYearsOfExperience(int yearsOfExperience) {
-		this.yearsOfExperience = yearsOfExperience;
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 	public String getSubject() {
@@ -79,4 +24,13 @@ public class Teacher {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+
+	public String getAcademicDegree() {
+		return academicDegree;
+	}
+
+	public void setAcademicDegree(String academicDegree) {
+		this.academicDegree = academicDegree;
+	}
+
 }
