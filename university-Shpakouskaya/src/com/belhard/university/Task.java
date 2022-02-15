@@ -14,11 +14,12 @@ public class Task {
 		Student st5 = new Student("Dmitriy", "Filipov", 9.8);
 		Student st6 = new Student("Ekaterina", "Gavriluk", 8.4);
 		Student st7 = new Student("Ivan", "Solncev", 6.2);
-		Student st8 = new Student("Igor", "Solovey", 8.0);
+		Student st8 = new Student("Igor", "Solovey", 9.0);
 		Student st9 = new Student("Sam", "Dermin", 7.9);
 
 		Teacher th1 = new Teacher("Oleg", "Demiday", 1);
 		th1.setSalary(new Money(Currency.BLR, BigDecimal.valueOf(900)));
+		th1.setName(NameOfDepartment.INFORMATION_TECHNOLOGY);
 		Teacher th2 = new Teacher("Nikita", "Parfenov", 3);
 		th2.setSalary(new Money(Currency.BLR, BigDecimal.valueOf(1100)));
 		Teacher th3 = new Teacher("Alexey", "Pilnov", 0);
@@ -47,7 +48,7 @@ public class Task {
 		group.setTeacher(th3);
 
 		Department department = new Department();
-		department.setNameOfDepartment("Applied Mathematics");
+		department.setName(NameOfDepartment.INFORMATION_TECHNOLOGY);
 		department.addTeacher(th1);
 		department.addTeacher(th2);
 		department.addTeacher(th3);
@@ -56,29 +57,35 @@ public class Task {
 		department.setDeputyHeadOfDepartment(th6);
 		department.setCleaner(cl1);
 
-		System.out.println(group.getList());
-		System.out.println(department.getList());
+		System.out.println(group.toString());
+		System.out.println(department.toString());
 
 		group.removeStudent(st5);
 		System.out.println("\tREMOVED STUDENT 5\n");
 		System.out.println(group.toString());
 
-		department.dismissTeacher(th2);
-		System.out.println("\tDISMISS TEACHER 2\n" + department.getList());
+		department.removeTeacher(th2);
+		System.out.println("\tDISMISS TEACHER 2\n" + department.toString());
 
 		group.addStudent(st9);
-		System.out.println("\tADDED NEW STUDENT:\n" + group.getList());
+		System.out.println("\tADDED NEW STUDENT:\n" + group.toString());
 
 		department.addTeacher(th7);
-		System.out.println("\tAPPOINTED NEW TEACHER ON DEPARTMENT:\n" + group.getList());
+		System.out.println("\tAPPOINTED NEW TEACHER ON DEPARTMENT:\n" + department.toString());
 
 		Money salary = AccauntantUtil.countTotalSalary(new Employee[] { th1, th3, th4, th5, th6, th7, cl1 });
-		System.out.println("Department staff salary is " + salary);
+		System.out.println("Department staff salary is " + salary + "\n");
 
 		department.setCleaner(null);
-		System.out.println("\tDISMISS CLEANER \n" + department.getList());
+		System.out.println("\tDISMISS CLEANER \n" + department.toString());
 		System.out.println(group.toString());
 		System.out.println(department.toString());
+		System.out.println(group.containsStudent(st9));
+		System.out.println(department.containsTeacher(th5));
+
+		st1.introduceYourself();
+		cl1.introduceYourself();
+		th1.introduceYourself();
 	}
 
 }
