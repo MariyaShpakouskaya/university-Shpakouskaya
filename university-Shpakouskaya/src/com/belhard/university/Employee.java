@@ -4,23 +4,15 @@ import java.math.BigDecimal;
 
 import com.belhard.university.Money.Currency;
 
-public class Employee extends Person {
-	private static long counter = 0;
-	private long id;
+public abstract class Employee extends Person implements Identifiable {
 	private int yearOfExperience;
 	private Money salary = new Money(Currency.BLR, BigDecimal.ZERO);
-	private String department;
 	private int hoursOfWork;
 	private int vacationDays;
 
 	public Employee(String firstName, String lastName, int yearOfExperience) {
 		super(firstName, lastName);
 		this.yearOfExperience = yearOfExperience;
-		id = ++counter;
-	}
-
-	public long getId() {
-		return id;
 	}
 
 	public int getYearOfExperience() {
@@ -39,14 +31,6 @@ public class Employee extends Person {
 		this.salary = salary;
 	}
 
-	public String getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(String department) {
-		this.department = department;
-	}
-
 	public int getHoursOfWork() {
 		return hoursOfWork;
 	}
@@ -62,4 +46,28 @@ public class Employee extends Person {
 	public void setVacationDays(int vacationDays) {
 		this.vacationDays = vacationDays;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this)
+			return true;
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		Employee employee = (Employee) obj;
+		return super.equals(obj) && yearOfExperience == employee.yearOfExperience;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = super.hashCode();
+		hash += yearOfExperience;
+		return hash;
+	}
+
 }

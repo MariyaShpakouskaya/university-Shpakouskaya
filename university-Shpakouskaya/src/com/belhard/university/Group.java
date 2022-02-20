@@ -1,72 +1,69 @@
 package com.belhard.university;
 
-public class Group {
+import com.belhard.university.datastructures.*;
+
+public class Group implements Identifiable {
+	private static long counter = 0;
+	private long id;
 	private int number;
 	private Teacher teacher;
-	private final Student[] students = new Student[8];
-	private int numberOfStudents;
+	private final MethodList<Student> students = new MyDynamicArray<>();
+	private int maxNumberOfStudents = 8;
+
+	public Group() {
+		id = ++counter;
+	}
 
 	public boolean addStudent(Student student) {
-		if (numberOfStudents < students.length) {
-			students[numberOfStudents++] = student;
+		if (students.size() < maxNumberOfStudents) {
+			students.add(student);
 			return true;
 		}
 		return false;
 	}
 
 	public boolean removeStudent(Student student) {
-		boolean removed = false;
-		for (int i = 0; i < numberOfStudents; i++) {
-			Student elm = students[i];
-			if (elm.getId() == student.getId()) {
-				students[i] = null;
-				removed = true;
-			}
-			if (removed == true) {
-				if (i != numberOfStudents - 1) {
-					students[i] = students[i + 1];
-				} else {
-					students[i] = null;
-				}
-			}
-		}
-		if (removed) {
-			numberOfStudents--;
-		}
-		return removed;
+		return students.remove(student);
+	}
+
+	public boolean containsStudent(Student student) {
+		return students.contains(student);
+	}
+
+	public String getStudent(int index) {
+		Student student = (Student) students.get(index);
+		String list = student.toString() + "\n";
+		return list;
 	}
 
 	public String getList() {
 		String list = "<<<<<<<  Group is number " + number + "  >>>>>>>\n";
 		list += "Teacher: ";
 		if (teacher != null) {
-			list += "[id: " + teacher.getId() + "] " + teacher.getFirstName() + " " + teacher.getLastName() + "\n";
+			list += teacher.toString() + "\n";
 		} else {
 			list += "NOT APPOINTED\n";
 		}
 		list += "Students:\n";
-		for (int i = 0; i < students.length; i++) {
-			Student student = students[i];
-			if (student == null) {
-				break;
-			}
-			list += (i + 1) + ". [id:" + student.getId() + "] " + student.getFirstName() + " " + student.getLastName()
-					+ " /average grade point: " + student.getGradePointAverage() + "/ \n";
+		Object[] array = students.toArray();
+		for (int i = 0; i < array.length; i++) {
+			Student student = (Student) array[i];
+			list += (i + 1) + student.toString();
 		}
-		list += "\n\tGrade Point Average of group is " + gradePointAverageOfStudents(students) + "\n";
+		list += "\n\tGrade Point Average of group is " + gradePointAverageOfStudents(array) + "\n";
 		return list;
 	}
 
-	public double gradePointAverageOfStudents(Student[] students) {
+	private double gradePointAverageOfStudents(Object[] array) {
 		double totalGradePoint = 0;
-		for (int i = 0; i < students.length; i++) {
-			Student student = students[i];
+		for (int i = 0; i < array.length; i++) {
+			Student student = (Student) array[i];
 			if (student == null) {
 				break;
 			}
 			totalGradePoint += student.getGradePointAverage();
 		}
-		double gradePointAverage = totalGradePoint / numberOfStudents;
+		double gradePointAverage = totalGradePoint / students.size();
 		return gradePointAverage;
 	}
 
@@ -86,14 +83,15 @@ public class Group {
 		this.teacher = teacher;
 	}
 
-	public int getNumberOfStudents() {
-		return numberOfStudents;
+	@Override
+	public long getId() {
+		return id;
 	}
 
 	@Override
 	public String toString() {
-		int numberOfFreePlaces = students.length - numberOfStudents;
-		return getList() + "\tNumber of Students: " + numberOfStudents + "\n" + "\tFree places in the group: "
+		int numberOfFreePlaces = maxNumberOfStudents - students.size();
+		return getList() + "\tNumber of Students: " + students.size() + "\n" + "\tFree places in the group: "
 				+ numberOfFreePlaces + "\n";
 	}
 
