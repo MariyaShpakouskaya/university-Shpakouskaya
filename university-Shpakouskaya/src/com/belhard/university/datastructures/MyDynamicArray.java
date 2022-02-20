@@ -58,6 +58,7 @@ public class MyDynamicArray<E> implements MethodList<E> {
 		return containObject;
 	}
 
+	@SuppressWarnings("unchecked")
 	public E get(int index) {
 		return (E) object[index];
 	}

@@ -1,6 +1,7 @@
 package com.belhard.university;
 
 import com.belhard.university.datastructures.*;
+import com.belhard.university.exceptions.*;
 
 public class Group implements Identifiable {
 	private static long counter = 0;
@@ -18,7 +19,12 @@ public class Group implements Identifiable {
 		if (students.size() < maxNumberOfStudents) {
 			students.add(student);
 			return true;
-		}
+		} else
+			try {
+				throw new RuntimeException();
+			} catch (Exception e) {
+				System.out.println("Group is full. Student not added. Program is already continued.");
+			}
 		return false;
 	}
 
@@ -73,6 +79,8 @@ public class Group implements Identifiable {
 
 	public void setNumber(int number) {
 		this.number = number;
+		if (number <= 0)
+			throw new NegativeNumberException("Number of group is not be negative or 0. The programm is stopped.");
 	}
 
 	public Teacher getTeacher() {

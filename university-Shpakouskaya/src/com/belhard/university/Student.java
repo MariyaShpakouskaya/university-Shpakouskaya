@@ -1,5 +1,7 @@
 package com.belhard.university;
 
+import com.belhard.university.exceptions.NegativeNumberException;
+
 public class Student extends Person implements Identifiable {
 	private int yearOfStudy;
 	private boolean isBudget;
@@ -9,6 +11,9 @@ public class Student extends Person implements Identifiable {
 	public Student(String firstName, String lastName, double gradePointAverage) {
 		super(firstName, lastName);
 		this.gradePointAverage = gradePointAverage;
+		if (gradePointAverage < 0) {
+			throw new NegativeNumberException("Grade point overage is not be negative.");
+		}
 	}
 
 	public Address getAddress() {
@@ -37,10 +42,6 @@ public class Student extends Person implements Identifiable {
 
 	public double getGradePointAverage() {
 		return gradePointAverage;
-	}
-
-	public void setGradePointAverage(double gradePointAverage) {
-		this.gradePointAverage = gradePointAverage;
 	}
 
 	@Override
