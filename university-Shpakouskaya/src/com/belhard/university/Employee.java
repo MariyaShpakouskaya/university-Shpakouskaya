@@ -1,6 +1,7 @@
 package com.belhard.university;
 
 import java.math.BigDecimal;
+import com.belhard.university.exceptions.*;
 
 import com.belhard.university.Money.Currency;
 
@@ -13,14 +14,12 @@ public abstract class Employee extends Person implements Identifiable {
 	public Employee(String firstName, String lastName, int yearOfExperience) {
 		super(firstName, lastName);
 		this.yearOfExperience = yearOfExperience;
+		if (yearOfExperience < 0)
+			throw new NegativeNumberException("Years of experience is not be negative.The programm is stopped.");
 	}
 
 	public int getYearOfExperience() {
 		return yearOfExperience;
-	}
-
-	public void setYearOfExperience(int yearOfExperience) {
-		this.yearOfExperience = yearOfExperience;
 	}
 
 	public Money getSalary() {

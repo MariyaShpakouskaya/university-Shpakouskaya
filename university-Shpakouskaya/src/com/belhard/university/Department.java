@@ -25,8 +25,14 @@ public class Department implements Identifiable {
 		if (teachers.size() < maxNumberOfTeacher) {
 			teachers.add(teacher);
 			return true;
+		} else {
+			try {
+				throw new RuntimeException();
+			} catch (Exception e) {
+				System.out.println("Department is full. Teacher not added. Program is already continued.");
+			}
+			return false;
 		}
-		return false;
 	}
 
 	public boolean removeTeacher(Teacher teacher) {
