@@ -1,6 +1,6 @@
 package com.belhard.university.datastructures;
 
-public class MyDynamicArray implements MethodList {
+public class MyDynamicArray<E> implements MethodList<E> {
 	private Object[] object = new Object[10];
 	private int size;
 
@@ -15,7 +15,7 @@ public class MyDynamicArray implements MethodList {
 		return counter;
 	}
 
-	public void add(Object obj) {
+	public void add(E obj) {
 		if (size >= object.length) {
 			Object[] objects = new Object[object.length * 2];
 			for (int i = 0; i < size(); i++) {
@@ -58,8 +58,8 @@ public class MyDynamicArray implements MethodList {
 		return containObject;
 	}
 
-	public Object get(int index) {
-		return object[index];
+	public E get(int index) {
+		return (E) object[index];
 	}
 
 	public Object[] toArray() {

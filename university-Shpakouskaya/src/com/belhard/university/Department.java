@@ -1,6 +1,6 @@
 package com.belhard.university;
 
-import com.belhard.university.datastructures.MyDynamicArray;
+import com.belhard.university.datastructures.*;
 
 public class Department implements Identifiable {
 	private static long counter = 0;
@@ -9,7 +9,7 @@ public class Department implements Identifiable {
 	private Teacher headOfDepartment;
 	private Teacher deputyHeadOfDepartment;
 	private Cleaner cleaner;
-	private final MyDynamicArray teachers = new MyDynamicArray();
+	private final MethodList<Teacher> teachers = new MyDynamicArray<>();
 	private int maxNumberOfTeacher = 8;
 
 	public Department() {
@@ -39,7 +39,7 @@ public class Department implements Identifiable {
 
 	public String getTeacher(int index) {
 		Teacher teacher = (Teacher) teachers.get(index);
-		String list = "[id:" + teacher.getId() + "] " + teacher.getFirstName() + " " + teacher.getLastName() + "\n";
+		String list = teacher.toString() + "\n";
 		return list;
 	}
 
@@ -95,10 +95,6 @@ public class Department implements Identifiable {
 
 	public void setCleaner(Cleaner cleaner) {
 		this.cleaner = cleaner;
-	}
-
-	public MyDynamicArray getTeachers() {
-		return teachers;
 	}
 
 	public NameOfDepartment getName() {

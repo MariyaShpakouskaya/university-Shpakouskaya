@@ -1,16 +1,16 @@
 package com.belhard.university.datastructures;
 
-public interface MethodList {
+public interface MethodList<E> {
 
 	int size();
 
-	void add(Object obj);
+	void add(E obj);
 
 	boolean remove(Object obj);
 
 	boolean contains(Object obj);
 
-	Object get(int index);
+	E get(int index);
 
 	Object[] toArray();
 }

@@ -1,13 +1,13 @@
 package com.belhard.university;
 
-import com.belhard.university.datastructures.MyDynamicArray;
+import com.belhard.university.datastructures.*;
 
 public class Group implements Identifiable {
 	private static long counter = 0;
 	private long id;
 	private int number;
 	private Teacher teacher;
-	private final MyDynamicArray students = new MyDynamicArray();
+	private final MethodList<Student> students = new MyDynamicArray<>();
 	private int maxNumberOfStudents = 8;
 
 	public Group() {
@@ -28,6 +28,12 @@ public class Group implements Identifiable {
 
 	public boolean containsStudent(Student student) {
 		return students.contains(student);
+	}
+
+	public String getStudent(int index) {
+		Student student = (Student) students.get(index);
+		String list = student.toString() + "\n";
+		return list;
 	}
 
 	public String getList() {
